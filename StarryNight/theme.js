@@ -51,31 +51,6 @@ waitForElement(['.Root__top-container'], ([topContainer]) => {
     backgroundContainer.appendChild(star);
   }
 
-  // handles resizing of playbar panel to match right sidebar below it
-  const playbar = document.querySelector('.Root__now-playing-bar');
-  const rightbar = document.querySelector('.Root__right-sidebar');
-
-  const resizeObserver = new ResizeObserver((entries) => {
-    for (const entry of entries) {
-      if (entry.target === rightbar) {
-        let newWidth = entry.contentRect.width;
-        if (newWidth === 0) {
-          const localStorageWidth = localStorage.getItem(
-            '223ni6f2epqcidhx5etjafeai:panel-width-saved'
-          );
-          if (localStorageWidth) {
-            newWidth = localStorageWidth;
-          } else {
-            newWidth = 420;
-          }
-        }
-        playbar.style.width = `${newWidth}px`;
-        break;
-      }
-    }
-  });
-
-  resizeObserver.observe(rightbar);
 
   // start or stop spinning animation based on whether something is playing
   const targetElement = document.querySelector('[data-encore-id="buttonPrimary"]');
